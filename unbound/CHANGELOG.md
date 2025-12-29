@@ -1,6 +1,11 @@
 # Changelog
 
-## [0.0.1] - 2025
+## [0.0.2] - 2025/12/29
+
+- Avoids host network.
+- Various cleanups as part of pre publish preparations
+
+## [0.0.1] - 2025/12/29
 
 ### Added
 - Initial release

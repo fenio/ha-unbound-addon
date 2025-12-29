@@ -1,6 +1,6 @@
-name: "Unbound DNS"
-description: "Unbound recursive DNS resolver for Home Assistant"
-version: "0.0.1"
+name: "Unbound"
+description: "Unbound recursive DNS resolver"
+version: "0.0.2"
 slug: "unbound"
 init: false
 arch:
