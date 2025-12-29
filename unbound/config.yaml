@@ -100,4 +100,5 @@ schema:
   log_queries: bool
 
 startup: system
+apparmor: true
 homeassistant_api: false
