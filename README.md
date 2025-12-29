@@ -8,7 +8,7 @@ Home Assistant add-on repository containing Unbound DNS resolver.
 
 ### [Unbound DNS](./unbound)
 
-![Version](https://img.shields.io/badge/version-0.0.1-blue.svg)
+![Version](https://img.shields.io/badge/version-0.0.5-blue.svg)
 
 A recursive DNS resolver using Unbound with support for:
 - Local DNS records
