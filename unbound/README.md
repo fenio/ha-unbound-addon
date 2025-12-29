@@ -74,17 +74,15 @@ forward_servers: []
 
 ## Network Configuration
 
-The add-on exposes DNS on port **5053** by default (mapped from container port 53).
+The add-on listens on port **5053** by default (mapped from container port 53).
 
 To use as your network's DNS server:
-1. Configure your router's DHCP to distribute `<home-assistant-ip>` as the DNS server on port 5053
-2. Or manually configure devices to use your Home Assistant IP
+1. Configure your router's DHCP to distribute your Home Assistant's IP as the DNS server
+2. Ensure clients query port 5053, or change the port mapping to 53 in the add-on configuration
 
 ### Changing the Port
 
-To use standard port 53, modify the port mapping in the add-on configuration panel.
-
-**Note**: Port 53 may conflict with other DNS services.
+You can modify the port mapping in the add-on's network configuration panel.
 
 ## Troubleshooting
 
