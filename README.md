@@ -1,8 +1,8 @@
-# Unbound Add-on for Home Assistant
+# Add-ons for Home Assistant
 
 [![License](https://img.shields.io/github/license/fenio/ha-unbound-addon.svg)](LICENSE)
 
-Home Assistant add-on repository containing Unbound DNS resolver.
+Home Assistant add-ons repository.
 
 ## Add-ons
 
