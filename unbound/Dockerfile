@@ -4,21 +4,14 @@ FROM ${BUILD_FROM}
 # Install unbound and dependencies
 RUN apk add --no-cache \
     unbound \
-    unbound-libs \
-    dnssec-root \
     bash \
     jq \
     curl
 
-# Create necessary directories
-RUN mkdir -p /var/run/unbound && \
-    chown unbound:unbound /var/run/unbound
-
-# Copy root hints for recursive resolution
-RUN curl -o /etc/unbound/root.hints https://www.internic.net/domain/named.root
-
-# Copy configuration files
-COPY rootfs /
+# Create necessary directories and download root hints
+RUN mkdir -p /var/run/unbound /etc/unbound && \
+    curl -o /etc/unbound/root.hints https://www.internic.net/domain/named.root && \
+    unbound-anchor -a /etc/unbound/root.key || true
 
 # Copy run script
 COPY run.sh /
