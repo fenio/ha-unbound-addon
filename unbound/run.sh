@@ -70,7 +70,7 @@ server:
     root-hints: "/etc/unbound/root.hints"
     
     # Trust anchor for DNSSEC
-    auto-trust-anchor-file: "/etc/unbound/root.key"
+    auto-trust-anchor-file: "/var/lib/unbound/root.key"
     
     # Hardening
     harden-glue: yes

@@ -9,9 +9,10 @@ RUN apk add --no-cache \
     curl
 
 # Create necessary directories and download root hints
-RUN mkdir -p /var/run/unbound /etc/unbound && \
+RUN mkdir -p /var/run/unbound /etc/unbound /var/lib/unbound && \
     curl -o /etc/unbound/root.hints https://www.internic.net/domain/named.root && \
-    unbound-anchor -a /etc/unbound/root.key || true
+    unbound-anchor -a /var/lib/unbound/root.key || true && \
+    chown -R unbound:unbound /var/lib/unbound /var/run/unbound
 
 # Copy run script
 COPY run.sh /
