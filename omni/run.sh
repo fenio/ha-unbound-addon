@@ -59,18 +59,18 @@ if [ -z "${ACCOUNT_ID}" ]; then
     bashio::log.info "Generated account ID: ${ACCOUNT_ID}"
 fi
 
-# Handle GPG key - either from config paste or file
+# Handle GPG key - either from config (base64 encoded) or file
 mkdir -p /data
 PRIVATE_KEY_PATH="/data/omni.asc"
 
-if bashio::config.has_value 'private_key'; then
-    bashio::log.info "Using GPG key from configuration..."
-    bashio::config 'private_key' > "${PRIVATE_KEY_PATH}" || {
-        bashio::log.error "Failed to write GPG key to ${PRIVATE_KEY_PATH}"
+if bashio::config.has_value 'private_key_base64'; then
+    bashio::log.info "Using GPG key from configuration (base64 encoded)..."
+    bashio::config 'private_key_base64' | base64 -d > "${PRIVATE_KEY_PATH}" || {
+        bashio::log.error "Failed to decode base64 GPG key"
+        bashio::log.error "Make sure you encoded the key with: cat omni.asc | base64 -w 0"
         exit 1
     }
     bashio::log.info "GPG key saved to ${PRIVATE_KEY_PATH} ($(wc -c < "${PRIVATE_KEY_PATH}") bytes)"
-    # Debug: show first and last lines of GPG key to verify format
     bashio::log.info "GPG key starts with: $(head -1 "${PRIVATE_KEY_PATH}")"
     bashio::log.info "GPG key ends with: $(tail -1 "${PRIVATE_KEY_PATH}")"
 elif bashio::config.has_value 'private_key_file'; then
@@ -79,13 +79,25 @@ elif bashio::config.has_value 'private_key_file'; then
         bashio::log.info "Using GPG key from file: /config/${PRIVATE_KEY_FILE}"
         cp "/config/${PRIVATE_KEY_FILE}" "${PRIVATE_KEY_PATH}"
     else
-        bashio::log.error "GPG key file not found at /config/${PRIVATE_KEY_FILE}"
+        bashio::log.error "=========================================="
+        bashio::log.error "GPG KEY FILE NOT FOUND!"
+        bashio::log.error "=========================================="
+        bashio::log.error "File not found: /config/${PRIVATE_KEY_FILE}"
+        bashio::log.error "Either place your omni.asc file in the /config directory,"
+        bashio::log.error "or use private_key_base64 with your base64-encoded key."
+        bashio::log.error "To encode: cat omni.asc | base64 -w 0"
+        bashio::log.error "=========================================="
         exit 1
     fi
 else
-    bashio::log.error "No GPG key configured!"
-    bashio::log.error "Please either paste your GPG key in 'private_key' or specify a filename in 'private_key_file'."
-    bashio::log.error "See documentation for instructions on generating the key."
+    bashio::log.error "=========================================="
+    bashio::log.error "NO GPG KEY CONFIGURED!"
+    bashio::log.error "=========================================="
+    bashio::log.error "Please configure one of the following:"
+    bashio::log.error "  - private_key_base64: base64-encoded GPG key (single line)"
+    bashio::log.error "    To encode: cat omni.asc | base64 -w 0"
+    bashio::log.error "  - private_key_file: filename in /config directory"
+    bashio::log.error "=========================================="
     exit 1
 fi
 

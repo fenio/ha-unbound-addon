@@ -1,6 +1,6 @@
 name: "Omni"
 description: "Siderolabs Omni - Kubernetes cluster management platform for Talos Linux"
-version: "0.0.1-t3"
+version: "0.0.1-t5"
 slug: "omni"
 init: false
 arch:
@@ -64,9 +64,9 @@ options:
   initial_users: []
   
   # GPG key for etcd encryption
-  # Option 1: Paste the key content directly (recommended)
-  private_key: ""
-  # Option 2: Filename in config directory (if private_key is empty)
+  # Option 1: Base64 encoded key (for Web UI) - run: cat omni.asc | base64 -w 0
+  private_key_base64: ""
+  # Option 2: Filename in /config directory
   private_key_file: ""
   
   # Advanced settings
@@ -112,7 +112,7 @@ schema:
     - str
   
   # GPG key
-  private_key: str?
+  private_key_base64: str?
   private_key_file: str?
   
   # Advanced

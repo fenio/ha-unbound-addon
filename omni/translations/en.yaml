@@ -68,12 +68,12 @@ configuration:
     description: Email addresses of users who should have admin access on first login (for Auth0).
 
   # GPG key
-  private_key:
-    name: GPG Private Key
-    description: Paste the full GPG key content here (armored format starting with -----BEGIN PGP PRIVATE KEY BLOCK-----). This is the recommended option.
+  private_key_base64:
+    name: GPG Private Key (Base64)
+    description: "Base64-encoded GPG key. To encode run: cat omni.asc | base64 -w 0"
   private_key_file:
     name: GPG Key Filename
-    description: Alternative to pasting the key - specify a filename in the /config directory containing the GPG key.
+    description: Alternative - specify a filename in the /config directory containing the GPG key.
 
   # Advanced settings
   event_sink_port:
