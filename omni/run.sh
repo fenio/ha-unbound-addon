@@ -70,6 +70,9 @@ if bashio::config.has_value 'private_key'; then
         exit 1
     }
     bashio::log.info "GPG key saved to ${PRIVATE_KEY_PATH} ($(wc -c < "${PRIVATE_KEY_PATH}") bytes)"
+    # Debug: show first and last lines of GPG key to verify format
+    bashio::log.info "GPG key starts with: $(head -1 "${PRIVATE_KEY_PATH}")"
+    bashio::log.info "GPG key ends with: $(tail -1 "${PRIVATE_KEY_PATH}")"
 elif bashio::config.has_value 'private_key_file'; then
     PRIVATE_KEY_FILE=$(bashio::config 'private_key_file')
     if [ -f "/config/${PRIVATE_KEY_FILE}" ]; then
@@ -86,6 +89,9 @@ else
     exit 1
 fi
 
+# Strip port from WireGuard IP if user included it
+WIREGUARD_IP_CLEAN="${WIREGUARD_IP%%:*}"
+
 # Build command arguments
 OMNI_ARGS=(
     "--account-id=${ACCOUNT_ID}"
@@ -97,7 +103,7 @@ OMNI_ARGS=(
     "--k8s-proxy-bind-addr=${K8S_PROXY_BIND_ADDR}"
     "--advertised-api-url=https://${ADVERTISED_DOMAIN}/"
     "--siderolink-api-advertised-url=https://${ADVERTISED_DOMAIN}:8090/"
-    "--siderolink-wireguard-advertised-addr=${WIREGUARD_IP}:${WIREGUARD_PORT}"
+    "--siderolink-wireguard-advertised-addr=${WIREGUARD_IP_CLEAN}:${WIREGUARD_PORT}"
     "--advertised-kubernetes-proxy-url=https://${ADVERTISED_DOMAIN}:8100/"
 )
 
