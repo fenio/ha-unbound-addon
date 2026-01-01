@@ -43,11 +43,13 @@ if [ -z "${ACCOUNT_ID}" ]; then
 fi
 
 # Handle GPG key - either from config paste or file
+mkdir -p /data
 PRIVATE_KEY_PATH="/data/omni.asc"
 
 if bashio::config.has_value 'private_key'; then
     bashio::log.info "Using GPG key from configuration..."
     bashio::config 'private_key' > "${PRIVATE_KEY_PATH}"
+    bashio::log.info "GPG key saved to ${PRIVATE_KEY_PATH}"
 elif bashio::config.has_value 'private_key_file'; then
     PRIVATE_KEY_FILE=$(bashio::config 'private_key_file')
     if [ -f "/config/${PRIVATE_KEY_FILE}" ]; then
