@@ -40,7 +40,11 @@ gpg --export-secret-key --armor omni@example.com > omni.asc
 **Important:** Do not add passphrases to the keys.
 
 You can either:
-- **Paste the key directly** in the `private_key` configuration field (recommended)
+- **Base64 encode and paste** in the `private_key_base64` configuration field (recommended for Web UI):
+  ```bash
+  cat omni.asc | base64 -w 0
+  ```
+  Copy the output and paste it into the `private_key_base64` field.
 - **Or** place the `omni.asc` file in your Home Assistant `/config` directory and set `private_key_file: "omni.asc"`
 
 ### 3. Authentication Provider
@@ -70,7 +74,7 @@ Ensure the following ports are accessible:
 | `wireguard_advertised_ip` | Public IP address for WireGuard (must be IP, not hostname) |
 | `tls_cert` | TLS certificate filename in `/ssl` |
 | `tls_key` | TLS private key filename in `/ssl` |
-| `private_key` | GPG key content (paste directly) - OR use `private_key_file` |
+| `private_key_base64` | GPG key base64-encoded (run: `cat omni.asc \| base64 -w 0`) - OR use `private_key_file` |
 
 ### Authentication (choose one)
 
@@ -105,10 +109,7 @@ advertised_domain: "omni.example.com"
 wireguard_advertised_ip: "203.0.113.50"
 tls_cert: "fullchain.pem"
 tls_key: "privkey.pem"
-private_key: |
-  -----BEGIN PGP PRIVATE KEY BLOCK-----
-  ... your key content ...
-  -----END PGP PRIVATE KEY BLOCK-----
+private_key_base64: "LS0tLS1CRUdJTiBQR1AgUFJJVkFURSBLRVkgQkxPQ0stLS0tLS4uLg=="
 auth_saml_enabled: true
 auth_saml_url: "https://login.microsoftonline.com/your-tenant/federationmetadata/2007-06/federationmetadata.xml"
 ```
