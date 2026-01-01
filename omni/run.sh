@@ -24,6 +24,20 @@ AUTH_AUTH0_ENABLED=$(bashio::config 'auth_auth0_enabled')
 AUTH_SAML_ENABLED=$(bashio::config 'auth_saml_enabled')
 AUTH_OIDC_ENABLED=$(bashio::config 'auth_oidc_enabled')
 
+# Check that at least one auth method is enabled (fail fast)
+if [ "${AUTH_AUTH0_ENABLED}" != "true" ] && [ "${AUTH_SAML_ENABLED}" != "true" ] && [ "${AUTH_OIDC_ENABLED}" != "true" ]; then
+    bashio::log.error "=========================================="
+    bashio::log.error "NO AUTHENTICATION METHOD CONFIGURED!"
+    bashio::log.error "=========================================="
+    bashio::log.error "At least one authentication method must be enabled."
+    bashio::log.error "Please enable one of the following in the add-on configuration:"
+    bashio::log.error "  - auth_auth0_enabled: true (+ auth_auth0_domain and auth_auth0_client_id)"
+    bashio::log.error "  - auth_saml_enabled: true (+ auth_saml_url)"
+    bashio::log.error "  - auth_oidc_enabled: true (+ auth_oidc_provider_url and auth_oidc_client_id)"
+    bashio::log.error "=========================================="
+    exit 1
+fi
+
 # Validate required configuration
 if [ -z "${ADVERTISED_DOMAIN}" ]; then
     bashio::log.error "advertised_domain is required!"
@@ -163,13 +177,6 @@ if [ "${AUTH_OIDC_ENABLED}" = "true" ]; then
     for scope in $(bashio::config 'auth_oidc_scopes'); do
         OMNI_ARGS+=("--auth-oidc-scopes=${scope}")
     done
-fi
-
-# Check that at least one auth method is enabled
-if [ "${AUTH_AUTH0_ENABLED}" != "true" ] && [ "${AUTH_SAML_ENABLED}" != "true" ] && [ "${AUTH_OIDC_ENABLED}" != "true" ]; then
-    bashio::log.error "At least one authentication method must be enabled!"
-    bashio::log.error "Please enable auth_auth0_enabled, auth_saml_enabled, or auth_oidc_enabled"
-    exit 1
 fi
 
 # Add initial users (for Auth0)
