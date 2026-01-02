@@ -18,7 +18,7 @@ TLS_KEY=$(bashio::config 'tls_key')
 # Port settings
 EVENT_SINK_PORT=$(bashio::config 'event_sink_port')
 BIND_ADDR=$(bashio::config 'bind_addr')
-SIDEROLINK_API_BIND_ADDR=$(bashio::config 'siderolink_api_bind_addr')
+MACHINE_API_BIND_ADDR=$(bashio::config 'siderolink_api_bind_addr')
 K8S_PROXY_BIND_ADDR=$(bashio::config 'k8s_proxy_bind_addr')
 WIREGUARD_PORT=$(bashio::config 'wireguard_port')
 
@@ -111,8 +111,9 @@ OMNI_ARGS=(
     "--private-key-source=file://${PRIVATE_KEY_PATH}"
     "--event-sink-port=${EVENT_SINK_PORT}"
     "--bind-addr=${BIND_ADDR}"
-    "--siderolink-api-bind-addr=${SIDEROLINK_API_BIND_ADDR}"
+    "--machine-api-bind-addr=${MACHINE_API_BIND_ADDR}"
     "--k8s-proxy-bind-addr=${K8S_PROXY_BIND_ADDR}"
+    "--sqlite-storage-path=/share/omni/omni.db"
     "--advertised-api-url=https://${ADVERTISED_DOMAIN}/"
     "--siderolink-api-advertised-url=https://${ADVERTISED_DOMAIN}:8090/"
     "--siderolink-wireguard-advertised-addr=${WIREGUARD_IP_CLEAN}:${WIREGUARD_PORT}"
