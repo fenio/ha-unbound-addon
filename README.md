@@ -8,13 +8,13 @@ Home Assistant add-ons repository.
 
 ### [Omada Controller (No AVX)](./omada-controller-no-avx)
 
-![Version](https://img.shields.io/badge/version-6.0.0.25--b8-blue.svg)
+![Version](https://img.shields.io/badge/version-6.0.0.25--ha1-blue.svg)
 
 TP-Link Omada Controller for CPUs without AVX support. The standard Omada Controller v6.x uses MongoDB which requires AVX CPU instructions, making it incompatible with older/low-power CPUs (Intel Atom, Celeron, older AMD, etc.). This add-on uses a custom-built MongoDB 7.0 without AVX requirements.
 
 ### [Unbound DNS](./unbound)
 
-![Version](https://img.shields.io/badge/version-0.0.6-blue.svg)
+![Version](https://img.shields.io/badge/version-1.24.2--ha1-blue.svg)
 
 A recursive DNS resolver using Unbound with support for:
 - Local DNS records
@@ -24,7 +24,7 @@ A recursive DNS resolver using Unbound with support for:
 
 ### [DLNA Proxy](./dlna-proxy)
 
-![Version](https://img.shields.io/badge/version-0.0.1-blue.svg)
+![Version](https://img.shields.io/badge/version-0.4.0--ha1-blue.svg)
 
 Makes a remote DLNA server (e.g., MiniDLNA) discoverable on your local network by broadcasting SSDP alive messages on its behalf. Useful when your media server is behind a VPN or on a different network segment.
 
