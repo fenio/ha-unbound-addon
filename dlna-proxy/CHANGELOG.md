@@ -1,0 +1,11 @@
+# Changelog
+
+## [0.0.1] - 2025/01/06
+
+### Added
+- Initial release
+- Broadcasts SSDP alive messages on behalf of a remote DLNA server
+- TCP proxy mode for clients that cannot directly reach the remote server
+- Configurable broadcast interval
+- Network interface selection
+- Multi-architecture support (amd64, aarch64)
