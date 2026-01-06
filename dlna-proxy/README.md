@@ -4,7 +4,7 @@ This add-on allows you to make a remote DLNA server (e.g., MiniDLNA) discoverabl
 
 ## Use Case
 
-If you're hosting a media library on a remote server (accessible via VPN or routed directly), `dlnaproxy` will announce that server on your local LAN as if it were physically present on your network.
+If you're hosting a media library on a remote server (accessible via VPN or routed directly), `dlna-proxy` will announce that server on your local LAN as if it were physically present on your network.
 
 ```
           Network boundary                 +------------------+
@@ -14,7 +14,7 @@ If you're hosting a media library on a remote server (accessible via VPN or rout
      |          ||                         +---^--------------+
 +----v-----+    ||   +------------+            |
 | Remote   |    ||   |            +------------+
-| DLNA     <----++---+ dlnaproxy  |    broadcast
+| DLNA     <----++---+ dlna-proxy |    broadcast
 | Server   | fetch info           |
 |          |    ++   |            |
 +----------+    ||   +------------+
@@ -56,4 +56,4 @@ This add-on uses host network mode because SSDP multicast discovery requires acc
 
 ## More Information
 
-For more details about dlnaproxy, see the [GitHub repository](https://github.com/fenio/dlnaproxy).
+For more details about dlna-proxy, see the [GitHub repository](https://github.com/fenio/dlna-proxy).

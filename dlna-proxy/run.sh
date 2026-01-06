@@ -26,14 +26,14 @@ if [ -z "${DESCRIPTION_URL}" ]; then
 fi
 
 # Build command arguments
-DLNAPROXY_ARGS=(
+DLNA_PROXY_ARGS=(
     "-u" "${DESCRIPTION_URL}"
     "-d" "${BROADCAST_INTERVAL}"
 )
 
 # Add verbosity flags
 for ((i=0; i<VERBOSE; i++)); do
-    DLNAPROXY_ARGS+=("-v")
+    DLNA_PROXY_ARGS+=("-v")
 done
 
 # Configure TCP proxy if enabled
@@ -48,14 +48,14 @@ if [ "${PROXY_ENABLED}" = "true" ]; then
     fi
     
     bashio::log.info "TCP proxy enabled at ${PROXY_IP}:${PROXY_PORT}"
-    DLNAPROXY_ARGS+=("-p" "${PROXY_IP}:${PROXY_PORT}")
+    DLNA_PROXY_ARGS+=("-p" "${PROXY_IP}:${PROXY_PORT}")
 fi
 
 # Configure network interface if specified
 if bashio::config.has_value 'interface'; then
     INTERFACE=$(bashio::config 'interface')
     bashio::log.info "Broadcasting on interface: ${INTERFACE}"
-    DLNAPROXY_ARGS+=("-i" "${INTERFACE}")
+    DLNA_PROXY_ARGS+=("-i" "${INTERFACE}")
 fi
 
 bashio::log.info "Starting DLNA Proxy with configuration:"
@@ -63,5 +63,5 @@ bashio::log.info "  Description URL: ${DESCRIPTION_URL}"
 bashio::log.info "  Broadcast interval: ${BROADCAST_INTERVAL}s"
 bashio::log.info "  Verbosity level: ${VERBOSE}"
 
-# Run dlnaproxy
-exec /usr/local/bin/dlnaproxy "${DLNAPROXY_ARGS[@]}"
+# Run dlna-proxy
+exec /usr/local/bin/dlna-proxy "${DLNA_PROXY_ARGS[@]}"

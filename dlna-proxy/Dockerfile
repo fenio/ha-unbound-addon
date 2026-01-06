@@ -1,8 +1,8 @@
 # Global ARG for build base image
 ARG BUILD_FROM
 
-# Get dlnaproxy binary from the official image
-FROM ghcr.io/fenio/dlnaproxy:main AS dlnaproxy
+# Get dlna-proxy binary from the official image
+FROM ghcr.io/fenio/dlna-proxy:main AS dlna-proxy
 
 # Build the actual addon
 FROM ${BUILD_FROM}
@@ -12,8 +12,8 @@ RUN apk add --no-cache \
     bash \
     jq
 
-# Copy dlnaproxy binary from the official image
-COPY --from=dlnaproxy /dlnaproxy /usr/local/bin/dlnaproxy
+# Copy dlna-proxy binary from the official image
+COPY --from=dlna-proxy /dlna-proxy /usr/local/bin/dlna-proxy
 
 # Copy run script
 COPY run.sh /

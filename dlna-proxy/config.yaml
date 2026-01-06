@@ -1,8 +1,8 @@
 name: "DLNA Proxy"
 description: "Broadcasts SSDP alive messages on behalf of a remote DLNA server, making it discoverable on your local network"
-url: "https://github.com/fenio/ha-addons/tree/main/dlnaproxy"
+url: "https://github.com/fenio/dlna-proxy"
 version: "0.0.1"
-slug: "dlnaproxy"
+slug: "dlna-proxy"
 init: false
 arch:
   - amd64
