@@ -1,6 +1,6 @@
 # Changelog
 
-## [0.0.1] - 2025/01/06
+## [0.4.2-ha1] - 2026/01/08
 
 ### Added
 - Initial release
