@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.4.2-ha2] - 2026/01/08
+
+### Added
+- Expose new dlna-proxy 0.4.2 options (wait/timeouts) in add-on config
+
 ## [0.4.2-ha1] - 2026/01/08
 
 ### Added

@@ -1,7 +1,7 @@
 name: "DLNA Proxy"
 description: "Broadcasts SSDP alive messages on behalf of a remote DLNA server, making it discoverable on your local network"
 url: "https://github.com/fenio/dlna-proxy"
-version: "0.4.2-ha1"
+version: "0.4.2-ha2"
 slug: "dlna-proxy"
 init: false
 arch:
@@ -18,6 +18,11 @@ options:
   proxy_ip: ""
   proxy_port: 8200
   interface: ""
+  wait: false
+  wait_interval: 30
+  connect_timeout: 2
+  proxy_timeout: 10
+  stream_timeout: 300
   verbose: 1
 
 schema:
@@ -27,6 +32,11 @@ schema:
   proxy_ip: str?
   proxy_port: int(1024,65535)?
   interface: str?
+  wait: bool
+  wait_interval: int(1,3600)
+  connect_timeout: int(1,120)
+  proxy_timeout: int(1,300)
+  stream_timeout: int(1,86400)
   verbose: int(0,3)
 
 startup: application

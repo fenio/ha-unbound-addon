@@ -11,6 +11,11 @@ bashio::log.info "Starting DLNA Proxy..."
 DESCRIPTION_URL=$(bashio::config 'description_url')
 BROADCAST_INTERVAL=$(bashio::config 'broadcast_interval')
 PROXY_ENABLED=$(bashio::config 'proxy_enabled')
+WAIT=$(bashio::config 'wait')
+WAIT_INTERVAL=$(bashio::config 'wait_interval')
+CONNECT_TIMEOUT=$(bashio::config 'connect_timeout')
+PROXY_TIMEOUT=$(bashio::config 'proxy_timeout')
+STREAM_TIMEOUT=$(bashio::config 'stream_timeout')
 VERBOSE=$(bashio::config 'verbose')
 
 # Validate required configuration
@@ -29,7 +34,12 @@ fi
 DLNA_PROXY_ARGS=(
     "-u" "${DESCRIPTION_URL}"
     "-d" "${BROADCAST_INTERVAL}"
+    "--connect-timeout" "${CONNECT_TIMEOUT}"
 )
+
+if [ "${WAIT}" = "true" ]; then
+    DLNA_PROXY_ARGS+=("-w" "${WAIT_INTERVAL}")
+fi
 
 # Add verbosity flags
 for ((i=0; i<VERBOSE; i++)); do
@@ -49,6 +59,8 @@ if [ "${PROXY_ENABLED}" = "true" ]; then
     
     bashio::log.info "TCP proxy enabled at ${PROXY_IP}:${PROXY_PORT}"
     DLNA_PROXY_ARGS+=("-p" "${PROXY_IP}:${PROXY_PORT}")
+    DLNA_PROXY_ARGS+=("--proxy-timeout" "${PROXY_TIMEOUT}")
+    DLNA_PROXY_ARGS+=("--stream-timeout" "${STREAM_TIMEOUT}")
 fi
 
 # Configure network interface if specified
@@ -61,6 +73,12 @@ fi
 bashio::log.info "Starting DLNA Proxy with configuration:"
 bashio::log.info "  Description URL: ${DESCRIPTION_URL}"
 bashio::log.info "  Broadcast interval: ${BROADCAST_INTERVAL}s"
+bashio::log.info "  Wait for availability: ${WAIT}"
+bashio::log.info "  Connect timeout: ${CONNECT_TIMEOUT}s"
+if [ "${PROXY_ENABLED}" = "true" ]; then
+    bashio::log.info "  Proxy timeout: ${PROXY_TIMEOUT}s"
+    bashio::log.info "  Stream timeout: ${STREAM_TIMEOUT}s"
+fi
 bashio::log.info "  Verbosity level: ${VERBOSE}"
 
 # Run dlna-proxy

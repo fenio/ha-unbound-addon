@@ -17,6 +17,21 @@ configuration:
   interface:
     name: Network Interface
     description: Network interface to broadcast SSDP messages on (leave empty for all interfaces)
+  wait:
+    name: Wait For Server
+    description: Wait for the remote DLNA server to become available at startup
+  wait_interval:
+    name: Wait Interval
+    description: Retry interval in seconds when waiting for server availability (default 30)
+  connect_timeout:
+    name: Connect Timeout
+    description: HTTP connect timeout in seconds for fetching the remote XML description (default 2)
+  proxy_timeout:
+    name: Proxy Connect Timeout
+    description: TCP connect timeout in seconds for proxy connections to the origin server (default 10)
+  stream_timeout:
+    name: Stream Timeout
+    description: TCP read/write timeout in seconds for active proxy streams (default 300)
   verbose:
     name: Verbosity Level
     description: "Logging verbosity: 0=warn, 1=info, 2=debug, 3=trace"
