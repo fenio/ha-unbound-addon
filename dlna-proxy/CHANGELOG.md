@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.5.0-ha2] - 2026/01/10
+
+### Fixed
+- Fix Docker image tag to actually use 0.5.0 (was incorrectly still using 0.4.2)
+
 ## [0.5.0-ha1] - 2026/01/09
 
 ### Changed
