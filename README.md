@@ -24,9 +24,9 @@ A recursive DNS resolver using Unbound with support for:
 
 ### [DLNA Proxy](./dlna-proxy)
 
-![Version](https://img.shields.io/badge/version-0.4.0--ha1-blue.svg)
+![Version](https://img.shields.io/badge/version-0.5.0--ha2-blue.svg)
 
-Makes a remote DLNA server (e.g., MiniDLNA) discoverable on your local network by broadcasting SSDP alive messages on its behalf. Useful when your media server is behind a VPN or on a different network segment.
+Makes a remote DLNA server (e.g., MiniDLNA) discoverable on your local network by broadcasting SSDP alive messages on its behalf. Includes an optional HTTP-aware TCP proxy that rewrites URLs on the fly, enabling access to servers behind VPNs or on different network segments.
 
 ### [Omni](./omni)
 
