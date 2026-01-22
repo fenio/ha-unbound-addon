@@ -28,7 +28,8 @@ This add-on uses a custom-built MongoDB 7.0 that doesn't require AVX instruction
 | 8088 | TCP | Management HTTP |
 | 8043 | TCP | Management HTTPS |
 | 8843 | TCP | Portal HTTPS |
-| 27001 | UDP | Device discovery |
+| 19810 | UDP | Device discovery (new) |
+| 27001 | UDP | App discovery |
 | 29810 | UDP | EAP discovery |
 | 29811 | TCP | EAP management v1 |
 | 29812 | TCP | EAP adoption |
